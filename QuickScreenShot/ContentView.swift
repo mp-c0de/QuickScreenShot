@@ -6,9 +6,19 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("QuickScreenShot")
-                .font(.title2)
-                .fontWeight(.semibold)
+            // Header with title and settings gear
+            HStack {
+                Text("QuickScreenShot")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                Spacer()
+                SettingsLink {
+                    Image(systemName: "gear")
+                        .font(.title3)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+            }
 
             Divider()
 
@@ -81,8 +91,8 @@ struct ContentView: View {
                 Button("Reset") {
                     manager.resetCounter()
                 }
-                .buttonStyle(.plain)
-                .foregroundStyle(.secondary)
+                .buttonStyle(.bordered)
+                .controlSize(.small)
             }
 
             // Capture button
@@ -95,7 +105,6 @@ struct ContentView: View {
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
             .disabled(manager.selectedRegion == nil || manager.saveDirectory == nil)
-            .keyboardShortcut("0", modifiers: [])
 
             Text(manager.statusMessage)
                 .font(.callout)
@@ -105,7 +114,7 @@ struct ContentView: View {
                 .background(.quaternary)
                 .clipShape(RoundedRectangle(cornerRadius: 6))
 
-            Text("Press 0 or click Capture")
+            Text("Press \(manager.shortcutDisplayString) or click Capture")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }

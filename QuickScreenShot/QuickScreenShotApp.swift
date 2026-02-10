@@ -12,6 +12,11 @@ struct QuickScreenShotApp: App {
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
+
+        Settings {
+            SettingsView()
+                .environmentObject(screenshotManager)
+        }
     }
 }
 
