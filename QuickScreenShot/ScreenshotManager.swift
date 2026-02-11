@@ -1,6 +1,7 @@
 import SwiftUI
 import ScreenCaptureKit
 import CoreImage
+import AudioToolbox
 
 enum CaptureQuality: String, CaseIterable {
     case low = "Low"
@@ -208,6 +209,7 @@ class ScreenshotManager: ObservableObject {
                     }
 
                     if savePNG(image: screenshot, to: fileURL) {
+                        AudioServicesPlaySystemSound(1108)
                         statusMessage = "Saved: \(filename)"
                         saveSettings()
                     } else {
