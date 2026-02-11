@@ -1,6 +1,6 @@
 # QuickScreenShot
 
-A lightweight macOS utility for quickly capturing screen regions with a single keypress.
+A lightweight macOS 26 utility for quickly capturing screen regions with a single keypress. Built with Liquid Glass UI.
 
 ## Features
 
@@ -11,6 +11,7 @@ A lightweight macOS utility for quickly capturing screen regions with a single k
 - Settings window (Cmd+,) with General, How to Use, and About tabs
 - Remembers all settings between launches (region, save location, shortcut)
 - Mac App Store ready with sandbox and security-scoped bookmarks
+- Liquid Glass design language throughout — glass-backed sections, glass buttons, and unified glass toolbar
 
 ## Usage
 
@@ -21,13 +22,14 @@ A lightweight macOS utility for quickly capturing screen regions with a single k
 
 ## Requirements
 
-- macOS 14.0+
+- macOS 26.0+
+- Xcode 26
 - Screen Recording permission
 - Accessibility permission (for global hotkey)
 
 ## Build
 
-Open `QuickScreenShot.xcodeproj` in Xcode and run.
+Open `QuickScreenShot.xcodeproj` in Xcode 26 and run.
 
 ---
 
