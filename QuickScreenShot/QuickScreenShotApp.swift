@@ -10,7 +10,8 @@ struct QuickScreenShotApp: App {
             ContentView()
                 .environmentObject(screenshotManager)
         }
-        .windowStyle(.hiddenTitleBar)
+        .windowStyle(.automatic)
+        .windowToolbarStyle(.unified(showsTitle: true))
         .windowResizability(.contentSize)
 
         Settings {
