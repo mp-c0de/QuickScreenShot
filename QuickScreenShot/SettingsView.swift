@@ -56,6 +56,11 @@ private struct GeneralTab: View {
                         .foregroundStyle(.secondary)
                 }
 
+                Toggle("Shutter Sound", isOn: $manager.soundEnabled)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 10)
+                    .glassEffect(.regular, in: .capsule)
+
                 Spacer()
             }
             .padding()

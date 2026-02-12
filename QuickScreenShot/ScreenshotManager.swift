@@ -1,7 +1,7 @@
 import SwiftUI
 import ScreenCaptureKit
 import CoreImage
-import AudioToolbox
+import AppKit
 
 enum CaptureQuality: String, CaseIterable {
     case low = "Low"
@@ -25,6 +25,11 @@ class ScreenshotManager: ObservableObject {
     @Published var statusMessage: String = "Set region and save location to start"
     @Published var hotkeyKeyCode: UInt16 = 29
     @Published var hotkeyModifiers: NSEvent.ModifierFlags = []
+    @Published var soundEnabled: Bool = true {
+        didSet {
+            UserDefaults.standard.set(soundEnabled, forKey: "soundEnabled")
+        }
+    }
     @Published var quality: CaptureQuality = .best {
         didSet {
             if isStreamRunning {
@@ -209,7 +214,9 @@ class ScreenshotManager: ObservableObject {
                     }
 
                     if savePNG(image: screenshot, to: fileURL) {
-                        AudioServicesPlaySystemSound(1108)
+                        if self.soundEnabled {
+                            NSSound(named: "Purr")?.play()
+                        }
                         statusMessage = "Saved: \(filename)"
                         saveSettings()
                     } else {
@@ -371,6 +378,10 @@ class ScreenshotManager: ObservableObject {
         if let qualityRaw = UserDefaults.standard.string(forKey: "captureQuality"),
            let savedQuality = CaptureQuality(rawValue: qualityRaw) {
             quality = savedQuality
+        }
+
+        if UserDefaults.standard.object(forKey: "soundEnabled") != nil {
+            soundEnabled = UserDefaults.standard.bool(forKey: "soundEnabled")
         }
 
         // Load hotkey settings
